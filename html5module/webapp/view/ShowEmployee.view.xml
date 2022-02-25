@@ -1,0 +1,81 @@
+<mvc:View controllerName = "logaligroup.html5module.controller.ShowEmployee"
+    xmlns:mvc = "sap.ui.core.mvc" 
+    xmlns = "sap.m" 
+    xmlns:f = "sap.f" 
+    xmlns:upload = "sap.m.upload" 
+    xmlns:core = "sap.ui.core" 
+    xmlns:commons = "sap.suite.ui.commons" displayBlock = "true">
+    <SplitApp id = "verEmpleados" initialDetail = "detail" initialMaster = "master">
+        <masterPages>
+            <Page id = "master" showHeader = "false">
+                <List id = "listaEmpleados" items = "{path:'oDataEmployee>/Users',filters:[{path:'SapId',operator:'EQ',value1:'michael.roca.jara@gmail.com'}]}">
+                    <headerToolbar>
+                        <Toolbar id = "_IDGenToolbar1">
+                            <Button id = "_IDGenButton1" icon = "sap-icon://nav-back" press = ".onNavBack"/>
+                            <SearchField id = "_IDGenSearchField1" liveChange = ".onSearch" />
+                        </Toolbar>
+                    </headerToolbar>
+                    <items>
+                        <StandardListItem id = "empleadoItem" title = "{oDataEmployee>FirstName} {oDataEmployee>LastName}" description = "{oDataEmployee>Dni}"  
+                                            press = ".onDetailsEmployee" type = "Navigation"/>
+                    </items>
+                </List>
+            </Page>
+        </masterPages>
+        <detailPages>
+            <Page id = "detail" showHeader = "false">
+                <FlexBox id = "_IDGenFlexBox1" alignItems = "Center" justifyContent = "Center" height = "100%">
+                    <Text id = "_IDGenText1" text = "{i18n>selectEmployee}" />
+                </FlexBox>
+            </Page>
+            <Page id = "employeeDetail">
+                <ObjectHeader id = "employeeHeader" icon = "{= ${oDataEmployee>Type} === '0' ? 'sap-icon://employee-pane' : 
+                                 ${oDataEmployee>Type} === '1' ? 'sap-icon://employee' : 
+                                 ${oDataEmployee>Type} === '2' ? 'sap-icon://leads' : 'sap-icon://sys-help'}" 
+                                title = "{oDataEmployee>FirstName} {oDataEmployee>LastName}" intro = "{oDataEmployee>Dni}" responsive = "true">
+                    <attributes>
+                        <ObjectAttribute id = "_IDGenObjectAttribute1"  title = "{i18n>incorporacion}" 
+                                         text = "{ path: 'oDataEmployee>CreationDate', type: 'sap.ui.model.type.Date' }" />
+                        <ObjectAttribute id = "_IDGenObjectAttribute2"  title = "{i18n>tipo}" text = "{= ${oDataEmployee>Type} === '0' ? ${i18n>empleadoInterno} : 
+                                                                                                         ${oDataEmployee>Type} === '1' ? ${i18n>empleadoAutonomo} : 
+                                                                                                         ${oDataEmployee>Type} === '2' ? ${i18n>empleadoGerente} : '' }" />
+                        <ObjectAttribute id = "_IDGenObjectAttribute3"  title = "{i18n>comentario}" text =  "{oDataEmployee>Comments}"/>
+                    </attributes>
+                </ObjectHeader>
+                <IconTabBar id = "employeeActions" class = "sapUiResponsiveContentPadding">
+                    <items>
+                        <IconTabFilter id = "tabFicheros" icon = "sap-icon://attachment" text = "{i18n>ficheros}">
+                            <upload:UploadSet id = "ficherosEmpleado" maxFileNameLength = "55" maxFileSize = "10" class = "sapUiSmallMarginBottom" 
+                                              items = "{oDataEmployee>UserToAttachment}"  uploadUrl = "/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments" 
+                                              afterItemRemoved = ".onItemRemoved" afterItemAdded = ".onItemAdded" uploadCompleted = ".onUploadCompleted">
+                                <upload:items>
+                                    <upload:UploadSetItem id = "_IDGenUploadSetItem1" visibleEdit = "false" fileName = "{oDataEmployee>DocName}" openPressed = ".onOpenPressed"
+                                                            url = "/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments(AttId='{oDataEmployee>AttId}',SapId='{oDataEmployee>SapId}',EmployeeId='{oDataEmployee>EmployeeId}')/$value" />
+                                </upload:items>
+                            </upload:UploadSet>
+                        </IconTabFilter>
+                        <IconTabFilter id = "tabHistorial" icon = "sap-icon://money-bills" text = "{i18n>historial}">
+                            <commons:Timeline id = "timeSalarios" enableDoubleSided = "false" content = "{oDataEmployee>UserToSalary}" 
+                                                showHeaderBar = "false" sortOldestFirst = "true" groupByType = "Year" groupBy = "CreationDate">
+                                <commons:content>
+                                    <commons:TimelineItem id = "_IDGenTimelineItem1" icon = "sap-icon://circle-task" text = "{oDataEmployee>Comments}" 
+                                                            dateTime = "{ path: 'oDataEmployee>CreationDate', type: 'sap.ui.model.type.Date' }" 
+                                                            userName = "{oDataEmployee>Amount}{oDataEmployee>Waers}">
+                                    </commons:TimelineItem>
+                                </commons:content>
+                            </commons:Timeline>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+                <footer>
+                    <Bar id = "_IDGenBar1">
+                        <contentRight>
+                            <Button id = "_IDGenButton2" text = "{i18n>baja}" press = "onBajaEmployee"/>
+                            <Button id = "_IDGenButton3" text = "{i18n>ascender}" press = "onAscenderEmployee"/>
+                        </contentRight>
+                    </Bar>
+                </footer>
+            </Page>
+        </detailPages>
+    </SplitApp>
+</mvc:View>

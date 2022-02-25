@@ -1,0 +1,20 @@
+<core:FragmentDefinition 
+    xmlns:core = "sap.ui.core"
+    xmlns = "sap.m">
+    <Dialog id = "ascenderDialog" title = "{i18n>nuevoAscenso}" titleAlignment = "Center">
+        <content>
+            <VBox id = "ascenderVBox" class = "sapUiSmallMargin">
+                <Text id = "ascenderSalarioTxt" text = "Salario:" />
+                <Input id = "ascensoSalario" type = "Number" value = "{ascenderModel>/Amount}" class = "sapUiSmallMarginBottom"/>
+                <Text id = "ascenderFechaTxt" text = "Fecha: "/>
+                <DatePicker id = "ascenderFecha" value="{ path: 'ascenderModel>/CreationDate', type: 'sap.ui.model.odata.type.DateTime' }" class = "sapUiSmallMarginBottom"/>
+                <Text id = "ascenderComentarioTxt" text = "Comentario: " />
+                <TextArea id = "ascenderComentario" value = "{ascenderModel>/Comments}" width = "100%"/>
+            </VBox>
+        </content>
+        <buttons>
+            <Button id = "ascenderBtnAceptar" text = "{i18n>aceptar}" press = "onAceptarAscenso"/>
+            <Button id = "ascenderBtnCancelar" text = "{i18n>cancelar}" press = "onCancelarAscenso"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
