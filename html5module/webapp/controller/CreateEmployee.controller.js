@@ -56,10 +56,10 @@ sap.ui.define([
              * Se Quita la presión de otros botones y se establece el tipo en 0 y la configuración del control deslizante. Ir al siguiente paso.
              */
             onInternoPress: function (oEvent) {
-                this.byId("autonomo").setPressed(false);
-                this.byId("gerente").setPressed(false);
+                //this.getView().byId("autonomo").setPressed(false);                
+                //this.byId("gerente").setPressed(false);
                 this.employeeModel.setProperty("/Type", 0);
-                this._updateSliderSettings(this.getI18nText("salarioBrutoAnual"), 12000, 80000, 24000, 1000);
+                this._updateSliderSettings(this.getText("salarioBrutoAnual"), 12000, 80000, 24000, 1000);
                 this.byId("dniEmpleado").fireLiveChange();
                 if (this._oWizard.getProgressStep() === this.byId("tipoEmpleado")) {
                     this._oWizard.nextStep();
@@ -74,7 +74,7 @@ sap.ui.define([
                 this.byId("interno").setPressed(false);
                 this.byId("gerente").setPressed(false);
                 this.employeeModel.setProperty("/Type", 1);
-                this._updateSliderSettings(this.getI18nText("precioDiario"), 100, 2000, 400, 50);
+                this._updateSliderSettings(this.getText("precioDiario"), 100, 2000, 400, 50);
                 this.byId("dniEmpleado").fireLiveChange();
                 if (this._oWizard.getProgressStep() === this.byId("tipoEmpleado")) {
                     this._oWizard.nextStep();
@@ -89,7 +89,7 @@ sap.ui.define([
                 this.byId("interno").setPressed(false);
                 this.byId("autonomo").setPressed(false);
                 this.employeeModel.setProperty("/Type", 2);
-                this._updateSliderSettings(this.getI18nText("salarioBrutoAnual"), 12000, 80000, 24000, 1000);
+                this._updateSliderSettings(this.getText("salarioBrutoAnual"), 12000, 80000, 24000, 1000);
                 this.byId("dniEmpleado").fireLiveChange();
                 if (this._oWizard.getProgressStep() === this.byId("tipoEmpleado")) {
                     this._oWizard.nextStep();
@@ -141,7 +141,7 @@ sap.ui.define([
                 }
 
                 if (dni === "") {
-                    this.byId("dniEmpleado").setValueStateText(this.getI18nText("campoObligatorio"));
+                    this.byId("dniEmpleado").setValueStateText(this.getText("campoObligatorio"));
                     this.employeeModel.setProperty("/dniState", "Error");
                 } else {
                     if (tipo !== 1) {
@@ -156,13 +156,13 @@ sap.ui.define([
                             letterList = letterList.substring(number, number + 1);
                             if (letterList !== letter.toUpperCase()) {
                                 this.employeeModel.setProperty("/dniState", "Error");
-                                this.byId("dniEmpleado").setValueStateText(this.getI18nText("dniIncorrecto"));
+                                this.byId("dniEmpleado").setValueStateText(this.getText("dniIncorrecto"));
                             } else {
                                 this.employeeModel.setProperty("/dniState", "None");
                             }
                         } else {
                             this.employeeModel.setProperty("/dniState", "Error");
-                            this.byId("dniEmpleado").setValueStateText(this.getI18nText("dniIncorrecto"));
+                            this.byId("dniEmpleado").setValueStateText(this.getText("dniIncorrecto"));
                         }
                     } else {
                         this.employeeModel.setProperty("/dniState", "None");
@@ -226,7 +226,7 @@ sap.ui.define([
              * Al cancelar la página de revisión.
              */
             onWizardCancel: function (oEvent) {
-                MessageBox.warning(this.getI18nText("cancelarMsg"), {
+                MessageBox.warning(this.getText("cancelarMsg"), {
                     actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                     onClose: function (oAction) {
                         if (oAction === MessageBox.Action.YES) {
@@ -241,7 +241,7 @@ sap.ui.define([
              * Se llama a la función de creación del servicio OData
              */
             onWizardSubmit: function (oEvent) {
-                MessageBox.warning(this.getI18nText("submitMsg"), {
+                MessageBox.warning(this.getText("submitMsg"), {
                     actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                     onClose: function (oAction) {
                         if (oAction === MessageBox.Action.YES) {

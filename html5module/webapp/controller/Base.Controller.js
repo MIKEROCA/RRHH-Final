@@ -13,7 +13,7 @@ sap.ui.define([
             onInit: function () {
             },
 
-            getI18nText: function (sText) {
+            getText: function (sText) {
                 return this.getView().getModel("i18n").getResourceBundle().getText(sText);
             }
 

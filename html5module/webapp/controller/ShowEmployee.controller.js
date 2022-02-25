@@ -95,7 +95,7 @@ sap.ui.define([
             onBajaEmployee: function (oEvent) {
                 var contextObj = oEvent.getSource().getBindingContext("oDataEmployee").getObject();
 
-                MessageBox.confirm(this.getI18nText("deleteEmployee"), {
+                MessageBox.confirm(this.getText("deleteEmployee"), {
                     onClose: function (oAction) {
                         if (oAction === MessageBox.Action.OK) {
                             this._deleteEmployee(contextObj.EmployeeId);
@@ -145,13 +145,13 @@ sap.ui.define([
 
                 this.getView().getModel("oDataEmployee").create("/Salaries", body, {
                     success: function (data) {
-                        sap.m.MessageToast.show(this.getI18nText("oDataAscensoOK"));
+                        sap.m.MessageToast.show(this.getText("oDataAscensoOK"));
                         this.byId("ascenderDialog").close();
                         oModel.setData(null);
                         this.getView().getModel("oDataEmployee").refresh();
                     }.bind(this),
                     error: function (error) {
-                        sap.m.MessageToast.show(this.getI18nText("oDataAscensoKO"));
+                        sap.m.MessageToast.show(this.getText("oDataAscensoKO"));
                     }.bind(this)
                 });
             },
@@ -164,10 +164,10 @@ sap.ui.define([
 
                 this.getView().getModel("oDataEmployee").remove(sPath, {
                     success: function (oData) {
-                        sap.m.MessageToast.show(this.getI18nText("fileDeleteOK"));
+                        sap.m.MessageToast.show(this.getText("fileDeleteOK"));
                     }.bind(this),
                     error: function (e) {
-                        sap.m.MessageToast.show(this.getI18nText("fileDeleteKO"));
+                        sap.m.MessageToast.show(this.getText("fileDeleteKO"));
                     }.bind(this)
                 });
 
@@ -254,12 +254,12 @@ sap.ui.define([
                 if (sEmployeeId) {
                     this.getView().getModel("oDataEmployee").remove("/Users(EmployeeId='" + sEmployeeId + "',SapId='" + this.getOwnerComponent().SapId + "')", {
                         success: function () {
-                            sap.m.MessageToast.show(this.getI18nText("oDataDeleteOK"));
+                            sap.m.MessageToast.show(this.getText("oDataDeleteOK"));
                             this.byId("listaEmpleados").getBinding("items").refresh();
                             this._oSplitApp.toDetail(this.byId("detail"));
                         }.bind(this),
                         error: function (e) {
-                            sap.m.MessageToast.show(this.getI18nText("oDataDeleteKO"));
+                            sap.m.MessageToast.show(this.getText("oDataDeleteKO"));
                         }.bind(this)
                     });
                 }
