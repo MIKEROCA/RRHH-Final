@@ -5,7 +5,7 @@
     xmlns:upload = "sap.m.upload" 
     xmlns:core = "sap.ui.core" 
     xmlns:commons = "sap.suite.ui.commons" displayBlock = "true">
-    <SplitApp id = "verEmpleados" initialDetail = "detail" initialMaster = "master">
+    <SplitApp id = "ShowEmployee" initialDetail = "detail" initialMaster = "master">
         <masterPages>
             <Page id = "master" showHeader = "false">
                 <List id = "listaEmpleados" items = "{path:'oDataEmployee>/Users',filters:[{path:'SapId',operator:'EQ',value1:'michael.roca.jara@gmail.com'}]}">

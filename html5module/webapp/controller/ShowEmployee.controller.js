@@ -17,9 +17,9 @@ sap.ui.define([
         "use strict";
 
         return Base.extend("logaligroup.html5module.controller.ShowEmployee", {
-            onInit: function () {
 
-                this._oSplitApp = this.byId("CreateEmployee");
+            onInit: function () {
+                this._oSplitApp = this.byId("ShowEmployee");
 
                 //Navegación
                 this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -111,7 +111,7 @@ sap.ui.define([
 
                 if (!this._oDialogPromotion) {
                     this._oDialogPromotion = this.loadFragment({
-                        name: "logali.html5module.view.DialogAscender"
+                        name: "logaligroup.html5module.view.DialogAscender"
                     });
                 }
                 this._oDialogPromotion.then(function (oDialog) {
