@@ -111,7 +111,7 @@ sap.ui.define([
 
                 if (!this._oDialogPromotion) {
                     this._oDialogPromotion = this.loadFragment({
-                        name: "logaligroup.html5module.view.DialogAscender"
+                        name: "logaligroup.html5module.view.DialogAscend"
                     });
                 }
                 this._oDialogPromotion.then(function (oDialog) {

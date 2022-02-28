@@ -16,7 +16,5 @@ sap.ui.define([
             getText: function (sText) {
                 return this.getView().getModel("i18n").getResourceBundle().getText(sText);
             }
-
-
         });
     });
